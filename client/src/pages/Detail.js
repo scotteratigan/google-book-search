@@ -9,18 +9,22 @@ import FormatAuthorList from '../utils/FormatAuthorList';
 
 class Detail extends Component {
   state = {
-    book: {}
+    book: {
+      title: '',
+      authors: []
+    },
+    bookNotFound: false
   };
 
   componentDidMount = async () => {
     let book = await API.getBook(this.props.match.params.id);
-    console.log('book:', book.data);
-    this.setState({ book: book.data });
+    // console.log('book:', book.data);
+    if (!book) {
+      this.setState({ bookNotFound: true });
+    } else {
+      this.setState({ book: book.data });
+    }
   }
-
-  // basically, if I get detail from the API, grab data from params, else make a call to local db
-  // or better, copy the scheme of routes?
-
 
   render() {
     return (
@@ -29,7 +33,9 @@ class Detail extends Component {
           <Col size='md-12'>
             <Jumbotron>
               <h1>
-                {this.state.book.title} by {FormatAuthorList(this.state.book.authors)}
+                {/* {this.state.bookNotFound ? '' : this.state.book.title} */}
+                {/* {this.state.book.title} by {FormatAuthorList(this.state.book.authors)} */}
+                {FormatAuthorList(this.state.book.authors)}
               </h1>
             </Jumbotron>
           </Col>
@@ -38,8 +44,9 @@ class Detail extends Component {
           <Col size='md-10 md-offset-1'>
             <article>
               <h1>Synopsis</h1>
-              <img />
-              <p>{this.state.book.description}</p>
+              {/* <img src={this.state.book.imageSrc} alt='Book Cover' />
+              <div dangerouslySetInnerHTML={{ __html: this.state.book.description }} />
+              <div><a href={this.state.book.link}>View in Google Play Store</a></div> */}
             </article>
           </Col>
         </Row>

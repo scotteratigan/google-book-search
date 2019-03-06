@@ -1,6 +1,6 @@
 import React from 'react';
 import FormatAuthorsList from '../../utils/FormatAuthorList';
-import DeleteBtn from '../../components/DeleteBtn';
+// this BookList component is called when you view books via search page
 
 const MAX_TITLE_CHARS = 75;
 
@@ -15,20 +15,19 @@ const BookList = props => {
     console.log('BookList props.books:', props.books);
     return (
         <ul className='list-group'>
-            {props.books.map(book => { 
+            {props.books.map(book => {
                 console.log('individual book:', book);
                 return (
-                    <li className='list-group-item' key={book._id}>
+                    <li className='list-group-item' key={book.id}>
                         <a href={`/view/${book.id}`}>
                             {formatTitle(book.title)} <small className='text-muted'> - {FormatAuthorsList(book.authors)}</small>
                         </a>
-                        {console.log(`calling deleteBook with argument ${book._id}`)}
-                        <DeleteBtn onClick={() => props.deleteBook(book._id)} />
                     </li>
-                
-            )})}
+
+                )
+            })}
         </ul>
     );
 };
-// 
+
 export default BookList;
