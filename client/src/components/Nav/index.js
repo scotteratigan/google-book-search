@@ -6,7 +6,7 @@ function Nav() {
     <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
       <Link to='/'>
         <span className='navbar-brand'>
-          React Reading List
+          Google Book Buddy
         </span>
       </Link>
     </nav>
